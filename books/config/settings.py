@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # регистрируем свое приложение store в наш проект
+    "store.apps.StoreConfig",
+    # добавляем Django REST
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
