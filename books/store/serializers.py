@@ -1,9 +1,9 @@
 # Внутри файла храняться сериализаторы
 
-# подключем родительский класс сериализатора
+# django_rest
 from rest_framework.serializers import ModelSerializer
 
-# подключем свою модель django
+# my_project
 from store.models import Book
 
 
@@ -13,4 +13,5 @@ class BookSerializer(ModelSerializer):
         # указываем сериализатору с какой моделью django будем взаемодействовать
         model = Book
         # указываем поля модели с которыми будем работать
+        # fields = ("id", "name" , "price") также может быть
         fields = "__all__"

@@ -1,11 +1,15 @@
-# Проводим Тестирование
-# Используем Unittest
+# Проводим Тестирование Предствалений
 
+# django
 from django.test import TestCase
+
+# my_project
 from store.logic import operations
+
 
 # terminal -> python manage.py test store
 class LogicTestCase(TestCase):
+
     def test_plus(self):
         result = operations(6, 13, "+")
         # .assertEqual (my_value1 , my_value2)  # -> True(False) Проверяте на равенство == двох значений
