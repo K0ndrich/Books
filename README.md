@@ -1,11 +1,11 @@
 <h2 align="center">Books</h2>
 
-### Project Description:
 
+### Project Name ->
 **Blog With Descriptions Of Books**
 
-### Инструменты разработки
 
+### Used Programs, Utils, Libraries  ->
 **Stack:**
 - **Python == 3.12.2**
 - **Django == 5.0.7**
