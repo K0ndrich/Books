@@ -124,3 +124,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# добавляем возможность задавать параметри в url для возвращея значений django_rest
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_PARSER_CLASSES": ("rest_framework.parsers.JSONParser",),
+}
