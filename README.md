@@ -10,6 +10,7 @@
 - **Python == 3.12.2**
 - **Django == 5.0.7**
 - **coverage == 7.6.1**
+- **ipython == 8.26.0**
 - **Data Base == sqlite3**
 
 
