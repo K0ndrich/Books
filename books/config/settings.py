@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # регистрируем свое приложение store в наш проект
     "store.apps.StoreConfig",
-    # добавляем Django REST
+    # rest_framework добавляем django_rest
     "rest_framework",
+    # django_filters фильтрация для django_rest
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -126,8 +128,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# добавляем возможность задавать параметри в url для возвращея значений django_rest
+# указываем json формат для django_rest по умолчанию
 REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PARSER_CLASSES": ("rest_framework.parsers.JSONParser",),
 }
