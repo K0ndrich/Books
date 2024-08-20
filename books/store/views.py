@@ -6,13 +6,12 @@ from django.shortcuts import render
 # django_rest
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 # my_project
 from store.serializers import BookSerializer
 from store.models import Book
 
-# additions
-import django_filters
 
 # API представление
 class BookViewSet(ModelViewSet):
@@ -23,10 +22,12 @@ class BookViewSet(ModelViewSet):
     # указываем какой сериализатор будем использовать
     serializer_class = BookSerializer
 
-    # --- ПОКА НЕ РАБОТАЕТ --- ↓
     # добавляем фильтрацию возвращаемых значений для django_rest
-    filter_backends = [DjangoFilterBackend]
-    # указываем по каким полям будем фильтроватть значения в url адресе браузера
-    filter_fields = ["price"]  # -> http://127.0.0.1:8000/book/?price=1000
-    # --- ПОКА НЕ РАБОТАЕТ --- ↑
+    filter_backends = [DjangoFilterBackend, SearchFilter]
 
+    # указываем по каким полям будем фильтроватть значения в url адресе браузера
+    filterset_fields = ["price"]  # -> 127.0.0.1:8000/book/?price=1000
+
+    # указываем поля для поисковой фильтрации сразу по нескольким параметрам
+    # ищет указаное значение my_value во всех указаных колонках в search_fields = ["name", "author_name"]
+    search_fields = ["name", "author_name"]  # -> 127.0.0.1:8000/book/?search=my_value
