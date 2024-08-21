@@ -15,11 +15,20 @@ from store.serializers import BookSerializer
 
 class BooksApiTestCase(APITestCase):
 
+    # функция запускаеться каждый раз перед запуском одного из наших тестов test_get снизу
+    def setUp(self):
+        self.book1 = Book.objects.create(
+            name="Test book 1 ", price=25, author_name="Author 1"
+        )
+        self.book2 = Book.objects.create(
+            name="Test book 2 ", price=55, author_name="Author 5"
+        )
+        self.book3 = Book.objects.create(
+            name="Test book Author 1", price=55, author_name="Author 2"
+        )
+
     # проверяем GET запрос для нашего api
     def test_get(self):
-
-        book1 = Book.objects.create(name="Test book 1 ", price=25)
-        book2 = Book.objects.create(name="Test book 2 ", price=30)
 
         # reverse(basename_from_router , args=[]) генерирует url запрос с указаными в нем параметрами
         # "book" к basename нужно добавлять ->
@@ -28,21 +37,32 @@ class BooksApiTestCase(APITestCase):
         url = reverse("book-list")  # -> /book/
 
         # self.client дает APITestCase
-        response = self.client.get(
-            url
-        )  # -> <Response status_code=200, "application/json">
+        response = self.client.get(url)  # -> 127.0.0.1:8000/book/
 
         # возвращает ответ на наш get запрос
         print(
             response.data
         )  # -> [{'id': 1, 'name': 'Test book 1 ', 'price': '25.00'}, {'id': 2, 'name': 'Test book 2 ', 'price': '30.00'}]
 
-        # many=True указывает что мы передаем список обьектов [book1, book2]
-        serializer_data = BookSerializer([book1, book2], many=True).data
+        # many=True указывает что мы передаем список обьектов [self.book1, self.book2]
+        serializer_data = BookSerializer(
+            [self.book1, self.book2, self.book3], many=True
+        ).data
 
         # status.HTTP_200_OK хранит просто код ответ 200
         # response.status_code хранит код статуса ответа от сервера на наш текущий get-запрос
         self.assertEqual(status.HTTP_200_OK, response.status_code)
-        print(f"{status.HTTP_200_OK}  1111")
-        print(f"{response.status_code}  222")
+        # print(f"{status.HTTP_200_OK}  1111")
+        # print(f"{response.status_code}  222")
+        self.assertEqual(serializer_data, response.data)
+
+    # проводит тестирование поиска search в url
+    def test_get_search(self):
+
+        url = reverse("book-list")
+        response = self.client.get(
+            url, data={"search": "Author 1"}
+        )  # -> 127.0.0.1:8000/book/?search=Author 1
+        serializer_data = BookSerializer([self.book1, self.book3], many=True).data
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
