@@ -7,6 +7,8 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.permissions import IsAuthenticated
+
 
 # my_project
 from store.serializers import BookSerializer
@@ -21,6 +23,9 @@ class BookViewSet(ModelViewSet):
 
     # указываем какой сериализатор будем использовать
     serializer_class = BookSerializer
+
+    # выполняет функцию авторизации пользователя , если он аунтентифицирован
+    permission_classes = [IsAuthenticated]
 
     # добавляем фильтрацию возвращаемых значений для django_rest
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
