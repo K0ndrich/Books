@@ -29,7 +29,7 @@ class BookViewSet(ModelViewSet):
 
     # добавляем фильтрацию возвращаемых значений для django_rest
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-
+  
     # указываем по каким полям будем фильтровать значения в url адресе браузера
     filterset_fields = ["price"]  # -> 127.0.0.1:8000/book/?price=1000
 
