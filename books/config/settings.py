@@ -39,10 +39,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # регистрируем свое приложение store в наш проект
     "store.apps.StoreConfig",
+    # pip install djangorestframework
     # rest_framework добавляем django_rest
     "rest_framework",
-    # django_filters фильтрация для django_rest
+    # pip install django-filter
+    # django_filters фильтрация обьектов для django_rest
     "django_filters",
+    # pip install social-auth-app-django
+    # добавяет авторизацию пользователей на нашем сайте черз социальные сети
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -133,3 +138,9 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
 }
+
+
+# social_django настройки
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
