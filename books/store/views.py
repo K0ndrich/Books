@@ -41,4 +41,4 @@ class BookViewSet(ModelViewSet):
     ordering_fields = [
         "price",
         "author_name",
-    ]  # -> 127.0.0.1:8000/book/?ordering=-price     # -> 127.0.0.1:8000/book/?ordering=price
+    ]   # -> 127.0.0.1:8000/book/?ordering=-price     # -> 127.0.0.1:8000/book/?ordering=price
