@@ -15,9 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+# django
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url , include
+
+# django_rest
 from rest_framework.routers import SimpleRouter
+
+# my_project
 from store.views import BookViewSet
 
 # создаем роутер для нашего api
@@ -29,6 +35,7 @@ router.register(r"book", BookViewSet)  # -> http://127.0.0.1:8000/book/
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    url("", include("social_django.urls", namespace="social")),
 ]
 
 # добавляем url адреса api к главным адресам

@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # регистрируем свое приложение store в наш проект
-    "store.apps.StoreConfig",
     # pip install djangorestframework
     # rest_framework добавляем django_rest
     "rest_framework",
@@ -48,6 +46,8 @@ INSTALLED_APPS = [
     # pip install social-auth-app-django
     # добавяет авторизацию пользователей на нашем сайте черз социальные сети
     "social_django",
+    # регистрируем свое приложение store в наш проект
+    "store.apps.StoreConfig",
 ]
 
 MIDDLEWARE = [
@@ -90,6 +90,13 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# указываем для social_django через какие сети может авторизоваться пользователь
+AUTHENTICATION_BACKENDS = (
+    
+    
+    "django.contrib.auth.backends.ModelBackend",)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -139,7 +146,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
 }
 
-   
+
 # social_django настройки
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
