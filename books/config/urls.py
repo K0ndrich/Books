@@ -18,7 +18,8 @@ Including another URLconf
 # django
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url , include
+from django.conf.urls import include
+from django.urls import re_path as url
 
 # django_rest
 from rest_framework.routers import SimpleRouter
