@@ -93,10 +93,10 @@ DATABASES = {
 
 # указываем для social_django через какие сети может авторизоваться пользователь
 AUTHENTICATION_BACKENDS = (
-    
-    
-    "django.contrib.auth.backends.ModelBackend",)
-
+    # добавляем авторизацию пользователей через git hub
+    "social_core.backends.github.GithubOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -150,4 +150,6 @@ REST_FRAMEWORK = {
 # social_django настройки
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+# указываем ключи, с помощью которым можем пользоваться git hub сервисом авторизации
+SOCIAL_AUTH_GITHUB_KEY = "a1b2c3d4"
+SOCIAL_AUTH_GITHUB_SECRET = "e5f6g7h8i9"
