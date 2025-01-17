@@ -14,9 +14,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# default django
 from django.contrib import admin
 from django.urls import path
 
+# django rest
+from rest_framework.routers import SimpleRouter
+
+# my_project
+from store.views import BookViewSet
+
+# создаем маршрутизатор url-путей для нашего API
+router = SimpleRouter()
+router.register(r"book", BookViewSet)  # -> http://127.0.0.1:8000/book/
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
+
+# router.urls хранит внутри себя дефолтные url-пути и которые добавили через router.register
+urlpatterns += router.urls

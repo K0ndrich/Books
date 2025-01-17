@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Books(models.Model):
+class Book(models.Model):
     name = models.CharField(max_length=255)
     # DecimalField ето числа с плавающей точкой
     # max_digits определяет общее количество цифр в числе
