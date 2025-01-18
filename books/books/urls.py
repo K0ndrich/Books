@@ -27,7 +27,7 @@ from store.views import BookViewSet
 
 # создаем маршрутизатор url-путей для нашего API
 router = SimpleRouter()
-router.register(r"book", BookViewSet)  # -> http://127.0.0.1:8000/book/
+router.register(r"book", BookViewSet)  # -> http://127.0.0.1:8000/book/?format=json
 
 urlpatterns = [
     path("admin/", admin.site.urls),
