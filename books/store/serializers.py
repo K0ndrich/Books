@@ -13,4 +13,5 @@ class BookSerializer(ModelSerializer):
         # model обьединяем текущий сериализатор с моделью Books
         model = Book
         # fields указывает с какими полями из модели будет взаемодействовать сериализатор
+        # fields = ("id", "name", "price")
         fields = "__all__"
