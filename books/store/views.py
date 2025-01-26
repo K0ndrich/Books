@@ -21,4 +21,4 @@ class BookViewSet(ModelViewSet):
     # указываем какой фильтр будем использовать
     filter_backends = [DjangoFilterBackend]
     # указывает по каким полям модели будем фильтровать данные
-    filter_fields = = ["price"]
+    filter_fields = ["price"]
