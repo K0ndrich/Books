@@ -4,6 +4,7 @@ from django.shortcuts import render
 # django rest
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 # my_project
 from store.models import Book
@@ -19,6 +20,8 @@ class BookViewSet(ModelViewSet):
 
     # фильтрация данных которые будут возвращаться сервером через API
     # указываем какой фильтр будем использовать
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     # указывает по каким полям модели будем фильтровать данные
-    filter_fields = ["price"]
+    filterset_fields = ["price"]  # -> 127.0.0.1:8000/book/?price=500
+    # указывает по каким полям будет осуществляться поиск елементов модели
+    search_fields = ["name", "author_name"]  # -> 127.0.0.1:8000/book/?search=Hemingway
