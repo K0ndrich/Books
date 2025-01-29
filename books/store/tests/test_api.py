@@ -56,7 +56,7 @@ class BooksApiTestCase(APITestCase):
         # print(response.data)  # -> [{'id': 1, 'name': 'Test book 1', 'price': '25.00'}, {'id': 2, 'name': 'Test book 2', 'price': '30.00'}]
 
     # тестируем выполнение функции фильтрации возвращаемых данных из модели через API
-    # /book/?price=500
+    # тестирование -> /book/?price=500
     def test_filter(self):
 
         url = reverse("book-list")
@@ -70,7 +70,7 @@ class BooksApiTestCase(APITestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
 
-    # book/?search=500
+    # тестирование -> book/?search=500
     def test_get_search(self):
 
         url = reverse("book-list")
