@@ -25,3 +25,6 @@ class BookViewSet(ModelViewSet):
     filterset_fields = ["price"]  # -> 127.0.0.1:8000/book/?price=500
     # указывает по каким полям будет осуществляться поиск елементов модели
     search_fields = ["name", "author_name"]  # -> 127.0.0.1:8000/book/?search=Hemingway
+    ordering_fields = ["price", "author_name"]  # -> 127.0.0.1:8000/book/?ordering=price
+    # -> 127.0.0.1:8000/book/?ordering=-price
+    # -> 127.0.0.1:8000/book/?ordering=+price
