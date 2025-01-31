@@ -17,7 +17,8 @@ Including another URLconf
 
 # default django
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
 
 # django rest
 from rest_framework.routers import SimpleRouter
@@ -31,6 +32,7 @@ router.register(r"book", BookViewSet)  # -> http://127.0.0.1:8000/book/?format=j
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    url("", include("social_django.urls", namespace="social")),
 ]
 
 # router.urls хранит внутри себя дефолтные url-пути и которые добавили через router.register

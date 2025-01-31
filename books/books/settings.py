@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # ДОБАВЛЕННЫЕ МОДУЛИ
     # фильтрация возвращемых значений из django rest
     "django_filters",
-    # мои добавленные приложения и модули в проект
+    # настройки для django-social-auth, добавляет аунтентификацию пользователей через социальные сети
+    "social_django",
+    # ----------------------------------------------
+    # МОИ ПРЕЛОЖЕНИЯ
     "store",
 ]
 
@@ -78,7 +82,7 @@ WSGI_APPLICATION = "books.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Подключение к БД SQLite
+# ПОДКЛЮЧЕНИЕ К БД SQLITE
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,6 +90,7 @@ WSGI_APPLICATION = "books.wsgi.application"
 #     }
 # }
 
+# ПОДКЛЮЧЕНИЕ К БД POSTGRESQL
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -139,9 +144,17 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+# НАСТРОЙКИ ДЛЯ DJANGO REST
 # указываем обработку страниц для django rest по умолчанию в формате json
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PARSER_CLASSES": ("rest_framework.parsers.JSONParser",),
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
+
+
+# НАСТРОЙКИ ДЛЯ DJANGO-SOCIAL-AUTH
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+SOCIAL_AUTH_URL_NAMESPACE = "social"
