@@ -63,7 +63,7 @@ ROOT_URLCONF = "books.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -156,5 +156,14 @@ REST_FRAMEWORK = {
 
 # НАСТРОЙКИ ДЛЯ DJANGO-SOCIAL-AUTH
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = (
+    # аутентификация пользователя через Git Hub
+    "social_core.backends.github.GithubOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
 SOCIAL_AUTH_URL_NAMESPACE = "social"
+
+# НАСТРОЙКИ ДЛЯ DJANGO-SOCIAL-AUTH ДЛЯ УАТЕНТИФКАЦИИ ЧЕРЕЗ GIT HUB
+# заначения берем из зарегистрированого приложения OAuth Apps в Developer Settings на Git Hub
+SOCIAL_AUTH_GITHUB_KEY = "Ov23lifGqSHPl6mtft2x"
+SOCIAL_AUTH_GITHUB_SECRET = "0322c776a6f26172813c839545cbab888e560e3c"
