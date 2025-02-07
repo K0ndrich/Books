@@ -96,7 +96,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "books_db",
         "USER": "postgres",
-        "PASSWORD": "1856",
+        "PASSWORD": "1234",
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -167,3 +167,4 @@ SOCIAL_AUTH_URL_NAMESPACE = "social"
 # заначения берем из зарегистрированого приложения OAuth Apps в Developer Settings на Git Hub
 SOCIAL_AUTH_GITHUB_KEY = "Ov23lifGqSHPl6mtft2x"
 SOCIAL_AUTH_GITHUB_SECRET = "0322c776a6f26172813c839545cbab888e560e3c"
+
