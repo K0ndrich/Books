@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
 # my_project
@@ -22,7 +22,8 @@ class BookViewSet(ModelViewSet):
 
     # разрешения для показа текущего views только для аутентифицированых пользователей
     # {"detail":"Authentication credentials were not provided."}
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # фильтрация данных которые будут возвращаться сервером через API
     # указываем какой фильтр будем использовать

@@ -2,6 +2,8 @@
 
 # default django
 from django.urls import reverse
+from django.contrib.auth.models import User
+
 
 # django rest
 from rest_framework.test import APITestCase
@@ -11,11 +13,16 @@ from rest_framework import status
 from store.models import Book
 from store.serializers import BookSerializer
 
+# addition
+import json
+
 
 class BooksApiTestCase(APITestCase):
 
     # функция setUp будет запускаться каждый раз перед запуском всех остальных функций ниже
     def setUp(self):
+        # создаем одноразового пользователя только для тестирования
+        self.user = User.objects.create(username="test_username")
 
         # добавление атрибутов для созданого класса
         # создание временных полей модели для тестирования выполнения views
@@ -83,3 +90,24 @@ class BooksApiTestCase(APITestCase):
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
+
+    # тестирование POST-запроса, создание одной новой ячейки в базе
+    def test_create(self):
+        url = reverse("book-list")
+        data = {
+            "name": "Programming in Python3",
+            "price": 150,
+            "author_name": "Mark Sumerfield",
+        }
+        # преобразовываем данные из data в json формат для отправки на сервер
+        json_data = json.dumps(data)
+
+        # одноразовая авторизация пользователя только для тестирования
+        self.client.force_login(self.user)
+        # self.client.post отправляем post-запрос
+        # data=json_data передаем сайту данные в json формате
+        response = self.client.post(
+            url, data=json_data, content_type="application/json"
+        )
+
+        self.assertEqual(status.HTTP_201_CREATED, response.status_code)
