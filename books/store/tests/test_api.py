@@ -93,6 +93,8 @@ class BooksApiTestCase(APITestCase):
 
     # тестирование POST-запроса, создание одной новой ячейки в базе
     def test_create(self):
+        # проверка на количество ячеек в базе
+        self.assertEqual(3, Book.objects.all().count())
         url = reverse("book-list")
         data = {
             "name": "Programming in Python3",
@@ -112,3 +114,6 @@ class BooksApiTestCase(APITestCase):
         )
 
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
+        
+        # тут уже была добавлена одна тестовая книга из функции setUp
+        self.assertEqual(4,Book.objects.all().count())
