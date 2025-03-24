@@ -103,6 +103,7 @@ class BooksApiTestCase(APITestCase):
         json_data = json.dumps(data)
 
         # одноразовая авторизация пользователя только для тестирования
+        # self.user новосозданый пользователь в функции више setUp для тестирования
         self.client.force_login(self.user)
         # self.client.post отправляем post-запрос
         # data=json_data передаем сайту данные в json формате
