@@ -114,6 +114,36 @@ class BooksApiTestCase(APITestCase):
         )
 
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
-        
+
         # тут уже была добавлена одна тестовая книга из функции setUp
-        self.assertEqual(4,Book.objects.all().count())
+        self.assertEqual(4, Book.objects.all().count())
+
+    def test_update(self):
+        # args=self.book_1.id передаем id ячейки в памяти, значения которых мы будем менять
+        # args кортеж, в нем не мжет быть один елемент
+        url = reverse("book-detail", args=(self.book_1.id,))
+
+        data = {
+            # берем название новосозданой книги из функции setUp
+            "name": self.book_1.name,
+            "price": 575,
+            "author_name": self.book_1.author_name,
+        }
+
+        # преобразовываем данные из data в json формат для отправки на сервер
+        json_data = json.dumps(data)
+        self.client.force_login(self.user)
+        # self.client.put используем метод PUT
+        response = self.client.put(url, data=json_data, content_type="application/json")
+
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        # заменяем старую ячейку памяти в тесте на новоизмененую ячейку из базы данных
+        
+        # Не Рекомендованый Способ
+        # self.book_1 = Book.objects.get(id=self.book_1.id)
+        
+        # Рекомендованый Способ
+        self.book_1.refresh_from_db()
+        
+        # проверяем изменилось ли указаное значение в нашей книге
+        self.assertEqual(575, self.book_1.price)
