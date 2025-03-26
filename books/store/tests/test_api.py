@@ -137,13 +137,14 @@ class BooksApiTestCase(APITestCase):
         response = self.client.put(url, data=json_data, content_type="application/json")
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
+
         # заменяем старую ячейку памяти в тесте на новоизмененую ячейку из базы данных
-        
+
         # Не Рекомендованый Способ
         # self.book_1 = Book.objects.get(id=self.book_1.id)
-        
+
         # Рекомендованый Способ
         self.book_1.refresh_from_db()
-        
+
         # проверяем изменилось ли указаное значение в нашей книге
         self.assertEqual(575, self.book_1.price)
