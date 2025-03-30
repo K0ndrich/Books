@@ -148,3 +148,17 @@ class BooksApiTestCase(APITestCase):
 
         # проверяем изменилось ли указаное значение в нашей книге
         self.assertEqual(575, self.book_1.price)
+
+    def test_delete(self):
+
+        url = reverse("book-detail", args=(self.book_1.id,))
+
+        self.client.force_login(self.user)
+
+        response = self.client.delete(url)
+
+        self.assertEqual(status.HTTP_204_NO_CONTENT, response.status_code)
+
+        # проверяме действительно ли ячейке из базы удалилась
+        with self.assertRaises(Book.DoesNotExist):
+            Book.objects.get(id=self.book_1.id)
