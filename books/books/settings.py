@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django_filters",
     # настройки для django-social-auth, добавляет аунтентификацию пользователей через социальные сети
     "social_django",
+    # добавляем shell_plus
+    "django_extensions",
     # ----------------------------------------------
     # МОИ ПРЕЛОЖЕНИЯ
     "store",
@@ -167,4 +169,3 @@ SOCIAL_AUTH_URL_NAMESPACE = "social"
 # заначения берем из зарегистрированого приложения OAuth Apps в Developer Settings на Git Hub
 SOCIAL_AUTH_GITHUB_KEY = "Ov23lifGqSHPl6mtft2x"
 SOCIAL_AUTH_GITHUB_SECRET = "0322c776a6f26172813c839545cbab888e560e3c"
-
